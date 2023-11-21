@@ -6,7 +6,7 @@ from rich import print
 from enum import Enum
 from json.decoder import JSONDecodeError
 import json as json_package
-from .__version__ import __version__, __title__
+from .__version__ import package_version, package_name
 
 app = typer.Typer(add_completion=False)
 
@@ -46,7 +46,7 @@ def process_json_data(value: str) -> str:
 
 def version_callback(value: bool):
     if value:
-        print(f"{__title__} Version: {__version__}")
+        print(f"{package_name} Version: {package_version}")
         raise typer.Exit()
 
 @app.command()
