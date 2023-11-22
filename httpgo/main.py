@@ -126,12 +126,10 @@ def main(
     if data:
         # 格式化列表为字典
         data = process_list_data(data)
-    # 创建会话
-    session = requests.session()
     try:
         first_time = time.time()
         # 请求
-        res = session.request(
+        res = requests.request(
             method=method,
             url=url,
             params=params,
