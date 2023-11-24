@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "httpgo"
-version = "0.3.0"
+version = "0.4.0"
 description = "CLI tool based on Requests"
 authors = ["RicarTang <357965604@qq.com>"]
 readme = "README.md"

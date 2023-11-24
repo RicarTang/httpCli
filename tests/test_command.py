@@ -1,5 +1,5 @@
 from typer.testing import CliRunner
-from pyhttpcli.main import app
+from httpgo.main import app
 
 
 runner = CliRunner()

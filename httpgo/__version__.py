@@ -1,4 +1,4 @@
-from .exception import VersionError
+from .utils._exception import VersionError
 
 try:
     from importlib.metadata import metadata

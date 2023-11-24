@@ -1,19 +1,17 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+httpgo 版本更改日志文件。
 
-## [Unreleased]
+## [0.4.0] - 2023-11-24
 
 ### Added
-- 这是版本添加的功能说明
+- 添加--proxies选项
 
 ### Changed
-- 这是版本改动的内容说明
+- 选项类型修改
+- --help修改部分说明
 
-### Fixed
-- 这是版本bug修复说明
-
-## [0.3.0] - 2023-01-01
+## [0.3.0] - 2023-11-22
 
 ### Changed
 - 修改requests会话调用为直接调用
