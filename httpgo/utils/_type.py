@@ -95,7 +95,7 @@ class JsonType(ParamType):
             dict_data = ast.literal_eval(value)
         except Exception:
             # 使用正则表达式提取键值对
-            pattern = re.compile(r"(\w+):([^,}]+)")
+            pattern = re.compile(r"{\s*([^:{}]+)\s*:\s*([^{}]+)\s*}")
             matches = pattern.findall(value)
             # 进行解析
             dict_data = dict(map(self.parse_powershell_input, matches))
