@@ -13,7 +13,7 @@ build-backend = "pdm.backend"
 
 [project]
 name = "httpgo"
-version = "0.5.0"
+version = "0.10.0"
 description = "CLI tool based on Requests"
 authors = [
     {name = "RicarTang", email = "357965604@qq.com"},
