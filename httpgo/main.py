@@ -3,6 +3,7 @@ import typer
 import time
 from typing import List
 from rich import print
+from rich.progress import Progress, SpinnerColumn, TextColumn
 from json.decoder import JSONDecodeError
 from .utils._callback import process_list_data, version_callback
 from .utils._enum import HttpMethod
@@ -105,17 +106,23 @@ def main(
     try:
         first_time = time.time()
         # 请求
-        res = requests.request(
-            method=method,
-            url=url,
-            params=params,
-            json=json,
-            data=data,
-            headers=headers,
-            timeout=timeout,
-            cookies=cookies,
-            proxies=proxies,
-        )
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            transient=True,
+        ) as progress:
+            progress.add_task(description="Requesting...", total=None)
+            res = requests.request(
+                method=method,
+                url=url,
+                params=params,
+                json=json,
+                data=data,
+                headers=headers,
+                timeout=timeout,
+                cookies=cookies,
+                proxies=proxies,
+            )
         last_time = time.time() - first_time
     except Exception as e:
         print("[bold red]Error:[/bold red]", e)
