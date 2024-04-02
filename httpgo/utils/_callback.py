@@ -1,16 +1,18 @@
 import json
+from rich import print
 import typer
 from ..__version__ import package_version, package_name
-from ..utils._exception import FormatError
 
 
 def process_list_data(value: list) -> dict:
     """处理列表"""
     try:
         list_to_dict = dict(map(lambda item: item.split("="), value))
-        return list_to_dict
     except ValueError:
-        raise FormatError
+        print(f"[bold red]Error:[/bold red] 参数格式错误。example:limit=20")
+        raise typer.Exit()
+    else:
+        return list_to_dict
 
 
 # def process_json_data(value: str) -> str:

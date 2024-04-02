@@ -1,7 +1,6 @@
-import re, ast, typer
+import json, typer
 from click import ParamType
 from rich import print
-from ._exception import UrlVerifyError
 
 # from pydantic import HttpUrl, validate_arguments
 
@@ -63,10 +62,7 @@ class UrlType(ParamType):
 class NameValueType(ParamType):
     """键值类型提示"""
 
-    name = "<NAME VALUE>"
-
-    def convert(self, value, param, ctx):
-        return value
+    name = "<NAME VALUE> ..."
 
 
 class JsonType(ParamType):
@@ -74,29 +70,13 @@ class JsonType(ParamType):
 
     name = "JSON"
 
-    def parse_powershell_input(self, key_value: tuple):
-        """对powershell输入进行操作
-
-        Args:
-            key_value (tuple): k,v元组
-
-        Returns:
-            _type_: _description_
-        """
-        key, value = key_value
-        return (
-            key,
-            str(value) if isinstance(value, int) or isinstance(value, float) else value,
-        )
 
     def convert(self, value, param, ctx):
+        """转化json为dict"""
         try:
-            # 使用 ast.literal_eval 将字符串转换为字典
-            dict_data = ast.literal_eval(value)
-        except Exception:
-            # 使用正则表达式提取键值对
-            pattern = re.compile(r"{\s*([^:{}]+)\s*:\s*([^{}]+)\s*}")
-            matches = pattern.findall(value)
-            # 进行解析
-            dict_data = dict(map(self.parse_powershell_input, matches))
-        return dict_data
+            dict_data = json.loads(value)
+        except json.JSONDecodeError:
+            print(f"[bold red]Error:[/bold red]  '--json' / '-j': 无效json格式")
+            raise typer.Exit()
+        else:
+            return dict_data

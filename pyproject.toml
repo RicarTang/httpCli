@@ -13,14 +13,15 @@ build-backend = "pdm.backend"
 
 [project]
 name = "httpgo"
-version = "0.20.0"
+version = "0.30.0"
 description = "CLI tool based on Requests"
 authors = [
     {name = "RicarTang", email = "357965604@qq.com"},
 ]
 dependencies = [
-    "typer[all]<1.0.0,>=0.9.0",
     "requests<3.0.0,>=2.31.0",
+    "httpx[cli]>=0.27.0",
+    "typer>=0.12.0",
 ]
 requires-python = ">=3.8,<4.0"
 readme = "README.md"
